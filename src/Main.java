@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class Main  {
 
@@ -50,6 +48,27 @@ public class Main  {
                 });
                 JMenuItem exit = new JMenuItem("Exit");
                 JMenuItem save = new JMenuItem("Save");
+                save.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JFileChooser jf = new JFileChooser();
+                        int r = jf.showSaveDialog(null);
+                        if(r==JFileChooser.APPROVE_OPTION)
+                        {
+                            File fl = new File(jf.getSelectedFile().getAbsolutePath());
+                            try{
+                            FileWriter wr = new FileWriter(fl,false);
+                            BufferedWriter br = new BufferedWriter(wr);
+                            br.write(textArea.getText());
+                            br.flush();
+                            br.close();
+                            }catch(Exception ext){
+                                JOptionPane.showMessageDialog(Frame,ext.getMessage());
+                        }
+
+                        }
+                    }
+                });
                 menu1.add(nw);
                 menu1.add(open);
                 menu1.add(save);
