@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 public class Main  {
 
@@ -17,6 +20,34 @@ public class Main  {
                 JMenu menu1 = new JMenu("File");
                 JMenuItem nw = new JMenuItem("New");
                 JMenuItem open = new JMenuItem("Open");
+                open.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        JFileChooser jf = new JFileChooser();
+                        int r = jf.showOpenDialog(null);
+                        if (r == JFileChooser.APPROVE_OPTION) {
+                            File openedFile = new File(jf.getSelectedFile().getAbsolutePath());
+                            try {
+                                //Read file
+                                String s1 = "";
+                                String sl = "";
+                                FileReader fr = new FileReader(openedFile);
+                                BufferedReader br = new BufferedReader(fr);
+                                sl = br.readLine();
+                                while ((s1 = br.readLine()) != null) {
+                                    sl = sl + "\n" + s1;
+                                }
+                                textArea.setText(sl);
+                            } catch (Exception ext) {
+                                JOptionPane.showMessageDialog(Frame,ext.getMessage());
+                            }
+
+
+                        }
+
+                    }
+                });
                 JMenuItem exit = new JMenuItem("Exit");
                 JMenuItem save = new JMenuItem("Save");
                 menu1.add(nw);
