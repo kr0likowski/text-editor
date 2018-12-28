@@ -17,6 +17,12 @@ public class Main  {
                 JMenuBar menubar = new JMenuBar();
                 JMenu menu1 = new JMenu("File");
                 JMenuItem nw = new JMenuItem("New");
+                nw.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        textArea.setText("");
+                    }
+                });
                 JMenuItem open = new JMenuItem("Open");
                 open.addActionListener(new ActionListener() {
                     @Override
@@ -82,8 +88,26 @@ public class Main  {
                 menubar.add(menu1);
                 JMenu menu2 = new JMenu("Edit");
                 JMenuItem copy = new JMenuItem("Copy");
+                copy.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        textArea.copy();
+                    }
+                });
                 JMenuItem paste = new JMenuItem("Paste");
+                paste.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        textArea.paste();
+                    }
+                });
                 JMenuItem cut = new JMenuItem("Cut");
+                cut.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        textArea.cut();
+                    }
+                });
                 menu2.add(copy);
                 menu2.add(cut);
                 menu2.add(paste);
